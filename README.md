@@ -1,1 +1,1 @@
-# lbms_final_project
+# Library Management System
