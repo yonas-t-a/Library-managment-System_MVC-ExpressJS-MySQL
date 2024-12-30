@@ -6,6 +6,7 @@ import adminRouters from './routers/api/adminRouters.js'
 import bookRouters from './routers/api/bookRouters.js'
 import branchRouters from './routers/api/branchesRouters.js'
 import catagoriesRouters from './routers/api/catagoriesRouters.js'
+import finesRouters from './routers/api/finesRouters.js'
 
 const app = express();
 const PORT =  process.env.PORT || 3501;
@@ -14,6 +15,7 @@ app.use('/api/adminstrator', adminRouters)
 app.use('/book', bookRouters)
 app.use('/branch', branchRouters)
 app.use('/catagorie', catagoriesRouters)
+app.use('/fines', finesRouters)
 
 
 app.listen(PORT ,  () => {
