@@ -14,8 +14,12 @@ import shelvesRouters from './routers/api/shelvesRouters.js'
 import staffRouters from './routers/api/staffRouters.js'
 import transactionRouters from './routers/api/transactionRouters.js'
 
+import { setUpDatabase } from './database.js';
+
 const app = express();
 const PORT =  process.env.PORT || 3501;
+
+setUpDatabase();
 
 app.use('/api/adminstrator', adminRouters)
 app.use('/book', bookRouters)
