@@ -38,7 +38,7 @@ export const setUpDatabase = async () => {
         const folderLocation = join(__dirpath, 'schema');
 
         const sqlFileNames = [
-            "create_admin_table.sql","create_member_table.sql","create_nonMemberBorrower_table.sql","create_catagories_table.sql","create_branches_table.sql","create_staff_table.sql","create_shelves_table.sql","create_book_table.sql","create_reservation_table.sql","create_transaction_table.sql","create_fines_table.sql", 
+            "create_admin_table.sql","create_member_table.sql","create_nonMemberBorrower_table.sql","create_catagories_table.sql","create_branches_table.sql","create_staff_table.sql","create_shelves_table.sql","create_book_table.sql","create_reservation_table.sql","create_transaction_table.sql","create_fines_table.sql", "create_shelfWithCatagory_table.sql"
         ] 
 
         // Create DataBase
