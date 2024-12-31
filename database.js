@@ -12,6 +12,7 @@ export const pool = mysql.createPool({
     host: process.env.MySQL_HOST,
     user: process.env.MySQL_USER,
     password: process.env.MySQL_PASSWORD,
+    database: process.env.MySQL_DATABASE,
     multipleStatements: true,
     queueLimit: 0
 }).promise();
@@ -48,7 +49,7 @@ export const setUpDatabase = async () => {
             await executeSQLFile(join(folderLocation, sqlFileNames[index]))
         }
             
-     
+        
         console.log("Databse design has been complated")
     } catch (error) {
         console.log(error.message)
