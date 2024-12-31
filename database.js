@@ -12,7 +12,8 @@ export const pool = mysql.createPool({
     host: process.env.MySQL_HOST,
     user: process.env.MySQL_USER,
     password: process.env.MySQL_PASSWORD,
-    multipleStatements: true
+    multipleStatements: true,
+    queueLimit: 0
 }).promise();
 
 const executeSQLFile = async (filePath) => {
