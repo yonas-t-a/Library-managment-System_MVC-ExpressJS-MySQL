@@ -25,6 +25,7 @@ export default async function getAllRows(tableName){
     const query = 'SELECT * FROM ??'
     try {
         const [data] = await pool.query(query, [tableName])
+        return data
     } catch (error) {
         console.log(`Error in gatting all the rows of ${tableName}: ${error.message} `)
         throw error;
