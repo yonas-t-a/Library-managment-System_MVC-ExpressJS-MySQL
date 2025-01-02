@@ -1,5 +1,12 @@
 import { pool } from "../../database.js";
 
+/**
+ * 
+ * @param {String} tableName - Name of the table to get row of the given id
+ * @param {String} idHoldingColumnName - Name of the Promery Key column name
+ * @param {String} id  - id
+ * @returns {Promise <JSON>}
+ */
 export default async function getRowByID(tableName, idHoldingColumnName, id) {
     const allowdNameOfDatabase = [
         "admin",

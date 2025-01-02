@@ -1,6 +1,10 @@
 import { pool } from "../../database";
 
-
+/**
+ * 
+ * @param {String} tableName - Name of the table to get all rows
+ * @returns {Promise <JSON>}
+ */
 
 export default async function getAllRows(tableName){
     const allowdNameOfDatabase = [
