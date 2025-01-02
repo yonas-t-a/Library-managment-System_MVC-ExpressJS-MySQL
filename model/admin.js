@@ -24,8 +24,9 @@ const adminModel = {
     getAdminByID: async(id)=>{
         getRowByID(tableName, idHoldingColumnName, id)
     },
-
-    
+    deleteAdmin: async (id) => {
+        deleteRowByID(tableName, idHoldingColumnName, id)
+    }
 }
 
 export default adminModel;
