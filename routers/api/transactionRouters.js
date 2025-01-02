@@ -5,7 +5,7 @@ import {
     getAllTransaction,
     getTransactionById,
     updateTransaction,
-    delateTransaction
+    deleteTransaction
 } from '../../controller/transactionController.js'
 
 const router = express.Router();
@@ -17,7 +17,7 @@ router.route('/')
 router.route('/:id')
     .get(getTransactionById)
     .put(updateTransaction)
-    .delete(delateTransaction)
+    .delete(deleteTransaction)
  
 
 export default router;

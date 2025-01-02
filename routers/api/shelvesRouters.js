@@ -5,7 +5,7 @@ import {
     getAllShelves,
     getShelvesById,
     updateShelves,
-    delateShelves
+    deleteShelves
 } from '../../controller/shelvesController.js'
 
 
@@ -18,7 +18,7 @@ router.route('/')
 router.route('/:id')
     .get(getShelvesById)
     .put(updateShelves)
-    .delete(delateShelves)
+    .delete(deleteShelves)
  
 
 export default router;

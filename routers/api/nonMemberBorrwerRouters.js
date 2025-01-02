@@ -5,7 +5,7 @@ import {
     getAllNonMember,
     getNonMemberById,
     updateNonMember,
-    delateNonMember
+    deleteNonMember
 } from '../../controller/nonMemberBorrwerController.js'
 
 
@@ -18,7 +18,7 @@ router.route('/')
 router.route('/:id')
     .get(getNonMemberById)
     .put(updateNonMember)
-    .delete(delateNonMember)
+    .delete(deleteNonMember)
  
 
 export default router;

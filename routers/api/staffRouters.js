@@ -5,7 +5,7 @@ import {
     getAllStaff,
     getStaffById,
     updateStaff,
-    delateStaff
+    deleteStaff
 } from '../../controller/staffController.js'
 
 
@@ -18,7 +18,7 @@ router.route('/')
 router.route('/:id')
     .get(getStaffById)
     .put(updateStaff)
-    .delete(delateStaff)
+    .delete(deleteStaff)
  
 
 export default router;

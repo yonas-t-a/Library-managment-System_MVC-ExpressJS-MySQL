@@ -5,7 +5,7 @@ import {
     getAllMember,
     getMemberById,
     updateMember,
-    delateMember
+    deleteMember
 } from '../../controller/membersController.js'
 
 const router = express.Router();
@@ -17,7 +17,7 @@ router.route('/')
 router.route('/:id')
     .get(getMemberById)
     .put(updateMember)
-    .delete(delateMember)
+    .delete(deleteMember)
  
 
 export default router;
