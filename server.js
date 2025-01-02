@@ -13,6 +13,7 @@ import reservationRouters from './routers/api/reservationRouters.js'
 import shelvesRouters from './routers/api/shelvesRouters.js'
 import staffRouters from './routers/api/staffRouters.js'
 import transactionRouters from './routers/api/transactionRouters.js'
+import shelfWithCategory from './routers/api/shelfWithCategoryRoutes.js'
 
 import { setUpDatabase } from './database.js';
 
@@ -20,6 +21,8 @@ const app = express();
 const PORT =  process.env.PORT || 3501;
 
 setUpDatabase();
+
+app.use(express.json())
 
 app.use('/api/adminstrator', adminRouters)
 app.use('/book', bookRouters)
@@ -32,6 +35,7 @@ app.use('/reservation', reservationRouters)
 app.use('/shelves', shelvesRouters)
 app.use('/staffs', staffRouters)
 app.use('/transaction', transactionRouters)
+app.use('/shelf-with-category', shelfWithCategory)
 
 
 app.listen(PORT ,  () => {
