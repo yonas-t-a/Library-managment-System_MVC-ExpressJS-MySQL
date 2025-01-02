@@ -24,6 +24,15 @@ const adminModel = {
     getAdminByID: async(id)=>{
         getRowByID(tableName, idHoldingColumnName, id)
     },
+    updateAdmin: async (id, name, phone_number, email, password) => {
+        const query = 'UPDATE admin SET name=?, phone_number=?, email=?, password=? WHERE id=?'
+        try {
+            await pool.query(query, [name, phone_number, email, password, id])
+        } catch (error) {
+            console.log('Error in Updating Admin')
+        }
+
+    },
     deleteAdmin: async (id) => {
         deleteRowByID(tableName, idHoldingColumnName, id)
     }
