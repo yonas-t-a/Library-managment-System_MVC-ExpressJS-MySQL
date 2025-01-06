@@ -15,6 +15,8 @@ import staffRouters from './routers/api/staffRouters.js'
 import transactionRouters from './routers/api/transactionRouters.js'
 import shelfWithCategory from './routers/api/shelfWithCategoryRoutes.js'
 
+import staticRoute from './routers/root.js'
+
 import { setUpDatabase } from './database.js';
 
 const app = express();
@@ -24,6 +26,9 @@ setUpDatabase();
 
 app.use(express.json())
 
+// FrontEnd Api Route
+
+app.use('/', staticRoute )
 
 // BackEnd Api Routes
 app.use('/api/adminstrator', adminRouters)
