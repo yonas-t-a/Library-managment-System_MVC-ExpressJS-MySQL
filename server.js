@@ -24,18 +24,20 @@ setUpDatabase();
 
 app.use(express.json())
 
+
+// BackEnd Api Routes
 app.use('/api/adminstrator', adminRouters)
-app.use('/book', bookRouters)
-app.use('/branch', branchRouters)
-app.use('/catagorie', catagoriesRouters)
-app.use('/fines', finesRouters)
-app.use('/member', membersRouters)
-app.use('/nonMember', nonMemberBorrwerRouters)
-app.use('/reservation', reservationRouters)
-app.use('/shelves', shelvesRouters)
-app.use('/staffs', staffRouters)
-app.use('/transaction', transactionRouters)
-app.use('/shelf-with-category', shelfWithCategory)
+app.use('/api/book', bookRouters)
+app.use('/api/branch', branchRouters)
+app.use('/api/catagorie', catagoriesRouters)
+app.use('/api/fines', finesRouters)
+app.use('/api/member', membersRouters)
+app.use('/api/nonMember', nonMemberBorrwerRouters)
+app.use('/api/reservation', reservationRouters)
+app.use('/api/shelves', shelvesRouters)
+app.use('/api/staffs', staffRouters)
+app.use('/api/transaction', transactionRouters)
+app.use('/api/shelf-with-category', shelfWithCategory)
 
 
 app.listen(PORT ,  () => {
