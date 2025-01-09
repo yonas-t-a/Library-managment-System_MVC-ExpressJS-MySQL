@@ -21,28 +21,81 @@
                 <a href="fines">Fines</a>
                 <a href="transaction">Transaction</a>
                 <a href="catagory">Catagory</a>
+                <a href="shelfWithCatagory">shelf With Catagory</a>
             </div>
             <div class="navGoToAdmin">
                 <a href="admin">admin</a>
             </div>
         </nav>
     </header>
-    <main>
-        <div class="left-add-find-delete">
-            <div class="insert-to-table">
-
-            </div>
-            <div class="find-by-id">
-
-            </div>
-            <div class="fetch-table">
-
-            </div>
+    <main class="admin-main">
+        <div class="what-header">
+            <h1>Member Management</h1>
         </div>
-        <div class="right-update">
-
-        </div>
-
+        <div class="admin-management">
+            <div class="left-add-find-delete">
+                <div class="insert-to-table">
+                    <h3>Add Member</h3>
+                    <form id="addMemberForm" class="addStaffFormIpt">
+                        <div class="firstPart">
+                        <input type="text" id="memberId" placeholder="Member ID" required />
+                        <input type="text" id="memberName" placeholder="Name" required />
+                        <input type="text" id="memberAddress" placeholder="Address" required />
+                        <input type="text" id="memberPhoneNumber" placeholder="Phone Number" required />
+                        </div>
+                        <div class="secondPart">
+                        <input type="email" id="memberEmail" placeholder="Email" required />
+                        <input type="date" id="memberDateOfMembership" placeholder="Date of Membership" required />
+                        <input type="text" id="memberMembershipStatus" placeholder="Membership Status" required />
+                        <button type="submit" class="add-btn">Add Member</button>
+                        </div>
+                    </form>                    
+                </div>
+                
+                <div class="find-by-id">
+                    <h3>Find Member by ID</h3>
+                    <form id="findMemberForm" class="findAdminFormIpt">
+                        <input type="text" id="memberId" placeholder="Member ID" required />
+                        <button type="submit" class="fetch-btn">Fetch Member</button>
+                    </form>
+                    <div id="memberDetails"></div> 
+                </div>
+        
+                <div class="fetch-table">
+                    <h3>All Members</h3>
+                    <table id="memberTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Phone Number</th>
+                                <th>Email</th>
+                                <th>Date of Membership</th>
+                                <th>Membership Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        
+            <div class="right-update">
+                <h3>Update Member</h3>
+                <form id="updateMemberForm">
+                    <input type="hidden" id="updateMemberId" />
+                    <input type="text" id="updateMemberName" placeholder="Name" required />
+                    <input type="text" id="updateMemberAddress" placeholder="Address" required />
+                    <input type="text" id="updateMemberPhoneNumber" placeholder="Phone Number" required />
+                    <input type="email" id="updateMemberEmail" placeholder="Email" required />
+                    <input type="date" id="updateMemberDateOfMembership" placeholder="Date of Membership" required />
+                    <input type="text" id="updateMemberMembershipStatus" placeholder="Membership Status" required />
+                    <button type="submit" class="update-btn">Update Member</button>
+                </form>
+            </div>
+        </div>            
     </main>
 </body>
 </html>

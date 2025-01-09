@@ -21,28 +21,76 @@
                 <a href="fines">Fines</a>
                 <a href="transaction">Transaction</a>
                 <a href="catagory">Catagory</a>
+                <a href="shelfWithCatagory">shelf With Catagory</a>
             </div>
             <div class="navGoToAdmin">
                 <a href="admin">admin</a>
             </div>
         </nav>
     </header>
-    <main>
-        <div class="left-add-find-delete">
-            <div class="insert-to-table">
-
-            </div>
-            <div class="find-by-id">
-
-            </div>
-            <div class="fetch-table">
-
-            </div>
+    <main class="admin-main">
+        <div class="what-header">
+            <h1>Reservation Management</h1>
         </div>
-        <div class="right-update">
-
-        </div>
-
+        <div class="admin-management">
+            <div class="left-add-find-delete">
+                <div class="insert-to-table">
+                    <h3>Add Reservation</h3>
+                    <form id="addReservationForm" class="addStaffFormIpt">
+                        <div class="firstPart">
+                        <input type="text" id="reservationID" placeholder="Reservation ID" required />
+                        <input type="date" id="reservationDate" placeholder="Reservation Date" required />
+                        <input type="text" id="reservationStatus" placeholder="Status" required />
+                        <input type="number" id="res_bookID" placeholder="Book ID" required />
+                        </div>
+                        <div class="secondPart">
+                        
+                        <input type="text" id="res_memberID" placeholder="Member ID" required />
+                        <button type="submit" class="add-btn">Add Reservation</button>
+                        </div>
+                    </form>                    
+                </div>
+                
+                <div class="find-by-id">
+                    <h3>Find Reservation by ID</h3>
+                    <form id="findReservationForm" class="findAdminFormIpt">
+                        <input type="text" id="reservationID" placeholder="Reservation ID" required />
+                        <button type="submit" class="fetch-btn">Fetch Reservation</button>
+                    </form>
+                    <div id="reservationDetails"></div> 
+                </div>
+        
+                <div class="fetch-table">
+                    <h3>All Reservations</h3>
+                    <table id="reservationTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Reservation Date</th>
+                                <th>Status</th>
+                                <th>Book ID</th>
+                                <th>Member ID</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        
+            <div class="right-update">
+                <h3>Update Reservation</h3>
+                <form id="updateReservationForm">
+                    <input type="hidden" id="updateReservationID" />
+                    <input type="date" id="updateReservationDate" placeholder="Reservation Date" required />
+                    <input type="text" id="updateReservationStatus" placeholder="Status" required />
+                    <input type="number" id="updateRes_bookID" placeholder="Book ID" required />
+                    <input type="text" id="updateRes_memberID" placeholder="Member ID" required />
+                    <button type="submit" class="update-btn">Update Reservation</button>
+                </form>
+            </div>
+        </div>            
     </main>
 </body>
 </html>

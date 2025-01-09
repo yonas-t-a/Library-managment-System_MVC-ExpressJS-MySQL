@@ -7,7 +7,8 @@ import {
     nonMembersPageHtml,
     reservationPageHtml,
     transactionPageHtml,
-
+    
+    shelfWithCatagoryPageHtml,
     catagoryPageHtml,
     indexPageHtml,
  } from '../controller/staticFileController.js';
@@ -24,6 +25,7 @@ router.get('/non-members(.html)?', nonMembersPageHtml)
 router.get('/reservation(.html)?', reservationPageHtml)
 router.get('/transaction(.html)?', transactionPageHtml)
 
+router.get('/shelfWithCatagory(.html)?', shelfWithCatagoryPageHtml)
 router.get('/catagory(.html)?', catagoryPageHtml)
 
 

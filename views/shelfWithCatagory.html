@@ -30,36 +30,36 @@
     </header>
     <main class="admin-main">
         <div class="what-header">
-            <h1>Category Management</h1>
+            <h1>Shelf with Category Management</h1>
         </div>
         <div class="admin-management">
             <div class="left-add-find-delete">
                 <div class="insert-to-table">
-                    <h3>Add Category</h3>
-                    <form id="addCategoryForm" class="addAdminFormIpt">
-                        <input type="text" id="catagoryName" placeholder="Category Name" required />
-                        <input type="text" id="description" placeholder="Description" />
-                        <button type="submit" class="add-btn">Add Category</button>
+                    <h3>Add Shelf with Category</h3>
+                    <form id="addShelfWithCategoryForm" class="addAdminFormIpt">
+                        <input type="text" id="swc_shelveCode" placeholder="Shelf Code" required />
+                        <input type="text" id="swc_catagoryID" placeholder="Category ID" required />
+                        <button type="submit" class="add-btn">Add</button>
                     </form>                    
                 </div>
                 
                 <div class="find-by-id">
-                    <h3>Find Category by ID</h3>
-                    <form id="findCategoryForm" class="findAdminFormIpt">
-                        <input type="text" id="catagoryID" placeholder="Category ID" required />
-                        <button type="submit" class="fetch-btn">Fetch Category</button>
+                    <h3>Find Shelf with Category</h3>
+                    <form id="findShelfWithCategoryForm" class="findAdminFormIpt">
+                        <input type="text" id="swc_shelveCode" placeholder="Shelf Code" required />
+                        <input type="text" id="swc_catagoryID" placeholder="Category ID" required />
+                        <button type="submit" class="fetch-btn">Fetch</button>
                     </form>
-                    <div id="categoryDetails"></div> 
+                    <div id="shelfWithCategoryDetails"></div> 
                 </div>
         
                 <div class="fetch-table">
-                    <h3>All Categories</h3>
-                    <table id="categoryTable">
+                    <h3>All Shelf with Categories</h3>
+                    <table id="shelfWithCategoryTable">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Description</th>
+                                <th>Shelf Code</th>
+                                <th>Category ID</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -70,12 +70,13 @@
             </div>
         
             <div class="right-update">
-                <h3>Update Category</h3>
-                <form id="updateCategoryForm">
-                    <input type="hidden" id="updateCatagoryID" />
-                    <input type="text" id="updateCatagoryName" placeholder="Category Name" required />
-                    <input type="text" id="updateDescription" placeholder="Description" />
-                    <button type="submit" class="update-btn">Update Category</button>
+                <h3>Update Shelf with Category</h3>
+                <form id="updateShelfWithCategoryForm">
+                    <input type="hidden" id="updateSwc_shelveCode" />
+                    <input type="hidden" id="updateSwc_catagoryID" /> 
+                    <input type="text" id="updateSwc_shelveCode" placeholder="Shelf Code" required />
+                    <input type="text" id="updateSwc_catagoryID" placeholder="Category ID" required />
+                    <button type="submit" class="update-btn">Update</button>
                 </form>
             </div>
         </div>            

@@ -18,27 +18,77 @@
                     <a href="/admin/branches">Branches</a>
                     <a href="/admin/shelfs">Shelfs</a>
                     <a href="/admin/staffs">Staffs</a>
+                    <a href="/catagory">Catagory</a>
+                    <a href="/shelfWithCatagory">shelf With Catagory</a>    
                 </div>
                 <div class="navGoToAdmin">
                     <a href="/index">Index</a>
                 </div>                
             </nav>
         </header>
-        <main>
-            <div class="left-add-find-delete">
-                <div class="insert-to-table">
-    
-                </div>
-                <div class="find-by-id">
-    
-                </div>
-                <div class="fetch-table">
-    
-                </div>
+        <main class="admin-main">
+            <div class="what-header">
+                <h1>Shelf Management</h1>
             </div>
-            <div class="right-update">
-    
-            </div>
+            <div class="admin-management">
+                <div class="left-add-find-delete">
+                    <!-- Add Admin Form -->
+                    <div class="insert-to-table">
+                        <h3>Add Shelf</h3>
+                        <form id="ShelfAddForm" class="addAdminFormIpt">
+                                <input type="text" id="shelfs_shelveDescription" placeholder="Description" required />
+                                <input type="number" id="shelfs_capCacity" placeholder="Capacity"  required />
+                                <input type="text" id="shelfs_adminID" placeholder="adminID"  required />
+                                <input type="text" id="shelfs_brancheID" placeholder="brancheID"  required />
+                            <button type="submit" class="add-btn">Shelf</button>
+                        </form>                    
+                    </div>
+                    
+                    <!-- Find Admin by ID -->
+                    <div class="find-by-id">
+                        <h3>Find Shelf by ID</h3>
+                        <form id="findShelfForm" class="findAdminFormIpt">
+                            <input type="text" id="shelfs_shelveCode" placeholder="shelveCode" required/>
+                            <input type="text" id="shelfs_brancheID" placeholder="brancheID" required/>
+                            <button type="submit" class="fetch-btn">Fetch Shelf</button>
+                        </form>
+                        <div id="ShelfDetails"></div> <!-- Will show the details of the admin -->
+                    </div>
+            
+                    <!-- All Admins Table -->
+                    <div class="fetch-table">
+                        <h3>All Shelfs</h3>
+                        <table id="ShelfTable">
+                            <thead>
+                                <tr>
+                                    <th>shelveCode</th>
+                                    <th>Description</th>
+                                    <th>capacity</th>
+                                    <th>adminID</th>
+                                    <th>brancheID</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            
+                <!-- Update Admin Form -->
+                <div class="right-update">
+                    <h3>Update Admin</h3>
+                    <form id="updateAdminForm">
+                        <input type="hidden"    id="updateShelfCode" />
+                        <input type="text"      id="updateShelfDescription" placeholder="Description" required />
+                        <input type="number"    id="updateShelfcapacity" placeholder="capacity" required />
+                        <input type="text"      id="updateShelfadminID" placeholder="adminID" required />
+                        <input type="text"      id="updateShelfbrancheID" placeholder="brancheID" />
+                        <button type="submit" class="update-btn">Update Admin</button>
+                    </form>
+                </div>
+            </div>            
         </main>
 </body>
 </html>

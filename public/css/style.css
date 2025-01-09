@@ -91,6 +91,8 @@ form {
 
 input[type="text"],
 input[type="email"],
+input[type="number"],
+input[type="date"],
 input[type="password"] {
     padding: 10px;
     font-size: 16px;
@@ -178,4 +180,77 @@ th {
     flex-direction: row;
     padding-bottom: 10px;
 }
+.addStaffFormIpt{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+.firstPart{
+    display: flex;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+.secondPart{
+    display: flex;
+    gap: 10px;
+}
 
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }  
+.custom-checkbox {
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 18px;
+    height: 18px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  
+    &:checked {
+      background-color: #4CAF50; 
+      border-color: #4CAF50;
+    }
+  }
+  
+  .custom-label {
+    /* font-size: 14px; */
+    color: #333;
+  }
+
+  input[type="date"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 200px; /* Adjust width as needed */
+  }
+  
+  .main-intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Make the container fill the viewport height */
+    background-color: #f0f0f0; 
+  }
+  
+  .main-intro h1 {
+    text-align: center;
+    animation: fadeIn 1s ease-in-out; 
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px); 
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

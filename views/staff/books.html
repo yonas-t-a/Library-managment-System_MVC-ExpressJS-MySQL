@@ -21,51 +21,80 @@
                 <a href="fines">Fines</a>
                 <a href="transaction">Transaction</a>
                 <a href="catagory">Category</a>
+                <a href="shelfWithCatagory">shelf With Catagory</a>
             </div>
             <div class="navGoToAdmin">
                 <a href="admin">Admin</a>
             </div>
         </nav>
     </header>
-    <main>
-        <div class="book-management">
-            <h1>Books Management</h1>
-            <form id="addBookForm">
-                <h3>Add New Book</h3>
-                <label>Title:</label>
-                <input type="text" id="title" required>
-                <label>Author:</label>
-                <input type="text" id="author" required>
-                <label>ISBN:</label>
-                <input type="text" id="isbn">
-                <label>Publisher:</label>
-                <input type="text" id="publisher" required>
-                <label>Category ID:</label>
-                <input type="text" id="categoryId" required>
-                <label>Shelve Code:</label>
-                <input type="text" id="shelveCode" required>
-                <button type="submit">Add Book</button>
-            </form>
-            <form method="post"></form>
-
-            <hr>
-            <h3>All Books</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Book ID</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>ISBN</th>
-                        <th>Publisher</th>
-                        <th>Category</th>
-                        <th>Shelve</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="bookList"></tbody>
-            </table>
+    <main class="admin-main">
+        <div class="what-header">
+            <h1>Book Management</h1>
         </div>
+        <div class="admin-management">
+            <div class="left-add-find-delete">
+                <div class="insert-to-table">
+                    <h3>Add Book</h3>
+                    <form id="addBookForm" class="addStaffFormIpt">
+                        <div class="firstPart">
+                        <input type="text" id="bookTitle" placeholder="Title" required />
+                        <input type="text" id="bookAuthor" placeholder="Author" required />
+                        <input type="text" id="bookISBN" placeholder="ISBN" />
+                        <input type="text" id="bookPublisher" placeholder="Publisher" required />
+                        </div>
+                        <div class="secondPart">
+                        <input type="text" id="book_catagoryID" placeholder="Category ID" required />
+                        <input type="text" id="book_shelveCode" placeholder="Shelf Code" required />
+                        <button type="submit" class="add-btn">Add Book</button>
+                        </div>
+                    </form>                    
+                </div>
+                
+                <div class="find-by-id">
+                    <h3>Find Book by ID</h3>
+                    <form id="findBookForm" class="findAdminFormIpt">
+                        <input type="number" id="bookId" placeholder="Book ID" required />
+                        <button type="submit" class="fetch-btn">Fetch Book</button>
+                    </form>
+                    <div id="bookDetails"></div> 
+                </div>
+        
+                <div class="fetch-table">
+                    <h3>All Books</h3>
+                    <table id="bookTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>ISBN</th>
+                                <th>Publisher</th>
+                                <th>Category ID</th>
+                                <th>Shelf Code</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        
+            <div class="right-update">
+                <h3>Update Book</h3>
+                <form id="updateBookForm">
+                    <input type="hidden" id="updateBookId" />
+                    <input type="text" id="updateBookTitle" placeholder="Title" required />
+                    <input type="text" id="updateBookAuthor" placeholder="Author" required />
+                    <input type="text" id="updateBookISBN" placeholder="ISBN" />
+                    <input type="text" id="updateBookPublisher" placeholder="Publisher" required />
+                    <input type="text" id="updateBook_catagoryID" placeholder="Category ID" required />
+                    <input type="text" id="updateBook_shelveCode" placeholder="Shelf Code" required />
+                    <button type="submit" class="update-btn">Update Book</button>
+                </form>
+            </div>
+        </div>            
     </main>
     <script src="../../public/js/booksFE.js" defer></script>
 </body>

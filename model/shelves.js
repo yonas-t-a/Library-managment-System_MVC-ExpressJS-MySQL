@@ -30,7 +30,7 @@ const shelvesModel = {
     },
 
     insertShelf: async (shelveDescription, capacity, sh_adminID, sh_brancheID) => {
-        const shelveCode = IdGenerator("shelveCode", "shelves", "shelve");
+        const shelveCode = await IdGenerator("shelveCode", "shelves", "shelve");
         const query = 'INSERT INTO shelves (shelveCode, shelveDescription, capacity, sh_adminID, sh_brancheID) VALUES (?,?,?,?,?)';
         try {
             await pool.query(query, [shelveCode, shelveDescription, capacity, sh_adminID, sh_brancheID]);

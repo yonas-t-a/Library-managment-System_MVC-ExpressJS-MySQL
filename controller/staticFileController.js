@@ -18,8 +18,7 @@ const staticReservationFileLocation = join(__dirname, "..", 'views', 'staff', 'r
 const staticTransactionFileLocation = join(__dirname, "..", 'views', 'staff', 'transaction.html')
 
 
-
-
+const staticshelfWithCatagoryFileLocation = join(__dirname, '..', 'views',"shelfWithCatagory.html")
 const staticCategoryFileLocation    = join(__dirname, '..', 'views', 'catagory.html');
 const staticIndexFileLocation       = join(__dirname, '..', 'views', 'index.html')
 
@@ -117,6 +116,14 @@ export async function catagoryPageHtml(req, res) {
         res.sendFile(staticCategoryFileLocation)
     } catch (error) {
         console.log(`Error in dealing with ${staticCategoryFileLocation}: ${error.message}`);
+        res.status(500).send("Internal Server Error");
+    }
+}
+export async function shelfWithCatagoryPageHtml(req, res) {
+    try {
+        res.sendFile(staticshelfWithCatagoryFileLocation);
+    } catch (error) {
+        console.log(`Error in dealing with ${staticshelfWithCatagoryFileLocation}: ${error.message}`);
         res.status(500).send("Internal Server Error");
     }
 }

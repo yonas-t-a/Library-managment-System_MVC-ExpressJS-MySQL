@@ -21,28 +21,71 @@
                 <a href="fines">Fines</a>
                 <a href="transaction">Transaction</a>
                 <a href="catagory">Catagory</a>
+                <a href="shelfWithCatagory">shelf With Catagory</a>
             </div>
             <div class="navGoToAdmin">
                 <a href="admin">admin</a>
             </div>
         </nav>
     </header>
-    <main>
-        <div class="left-add-find-delete">
-            <div class="insert-to-table">
-
-            </div>
-            <div class="find-by-id">
-
-            </div>
-            <div class="fetch-table">
-
-            </div>
+    <main class="admin-main">
+        <div class="what-header">
+            <h1>Fine Management</h1>
         </div>
-        <div class="right-update">
-
-        </div>
-
+        <div class="admin-management">
+            <div class="left-add-find-delete">
+                <div class="insert-to-table">
+                    <h3>Add Fine</h3>
+                    <form id="addFineForm" class="addAdminFormIpt">
+                        <input type="text" id="fineID" placeholder="Fine ID" required />
+                        <input type="number" id="amount" placeholder="Amount" required />
+                        <div class="form-group"><input type="checkbox" id="paidStatus" class="custom-checkbox"/> <label for="paidStatus" class="custom-label">Paid</label></div>
+                        <input type="date" id="datePaid" placeholder="Date Paid" />
+                        <input type="text" id="fs_transactionID" placeholder="Transaction ID" required /> 
+                        <button type="submit" class="add-btn">Add Fine</button>
+                    </form>                    
+                </div>
+                
+                <div class="find-by-id">
+                    <h3>Find Fine by ID</h3>
+                    <form id="findFineForm" class="findAdminFormIpt">
+                        <input type="text" id="fineID" placeholder="Fine ID" required />
+                        <button type="submit" class="fetch-btn">Fetch Fine</button>
+                    </form>
+                    <div id="fineDetails"></div> 
+                </div>
+        
+                <div class="fetch-table">
+                    <h3>All Fines</h3>
+                    <table id="fineTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Amount</th>
+                                <th>Paid Status</th>
+                                <th>Date Paid</th>
+                                <th>Transaction ID</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        
+            <div class="right-update">
+                <h3>Update Fine</h3>
+                <form id="updateFineForm">
+                    <input type="hidden" id="updateFineID" />
+                    <input type="number" id="updateAmount" placeholder="Amount" required />
+                    <div class="form-group"><input type="checkbox" id="updatePaidStatus" class="custom-checkbox" /> <label for="updatePaidStatus" class="custom-label">Paid</label></div>
+                    <input type="date" id="updateDatePaid" placeholder="Date Paid" />
+                    <input type="text" id="updateFs_transactionID" placeholder="Transaction ID" required /> 
+                    <button type="submit" class="update-btn">Update Fine</button>
+                </form>
+            </div>
+        </div>            
     </main>
 </body>
 </html>

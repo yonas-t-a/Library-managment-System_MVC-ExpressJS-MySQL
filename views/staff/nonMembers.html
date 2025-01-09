@@ -21,28 +21,78 @@
                 <a href="fines">Fines</a>
                 <a href="transaction">Transaction</a>
                 <a href="catagory">Catagory</a>
+                <a href="shelfWithCatagory">shelf With Catagory</a>
             </div>
             <div class="navGoToAdmin">
                 <a href="admin">admin</a>
             </div>
         </nav>
     </header>
-    <main>
-        <div class="left-add-find-delete">
-            <div class="insert-to-table">
-
-            </div>
-            <div class="find-by-id">
-
-            </div>
-            <div class="fetch-table">
-
-            </div>
+    <main class="admin-main">
+        <div class="what-header">
+            <h1>Non-Member Borrower Management</h1>
         </div>
-        <div class="right-update">
-
-        </div>
-
+        <div class="admin-management">
+            <div class="left-add-find-delete">
+                <div class="insert-to-table">
+                    <h3>Add Non-Member Borrower</h3>
+                    <form id="addNonMemberBorrowerForm" class="addStaffFormIpt">
+                        <div class="firstPart">
+                        <input type="text" id="borrowID" placeholder="Borrow ID" required />
+                        <input type="text" id="borrowerName" placeholder="Name" required />
+                        <input type="text" id="borrowerAddress" placeholder="Address" required />
+                        <input type="text" id="borrowerPhoneNumber" placeholder="Phone Number" required />
+                        </div>
+                        <div class="secondPart">
+                        <div class="form-group"><input type="checkbox" id="IDProof_Status" class="custom-checkbox" /> <label for="IDProof_Status"class="custom-label" class="custom-label">ID Proof Verified</label></div>
+                        <input type="text" id="borrowerStatus" placeholder="Status" required />
+                        <button type="submit" class="add-btn">Add Borrower</button>
+                        </div>
+                    </form>                    
+                </div>
+                
+                <div class="find-by-id">
+                    <h3>Find Non-Member Borrower by ID</h3>
+                    <form id="findNonMemberBorrowerForm" class="findAdminFormIpt">
+                        <input type="text" id="borrowID" placeholder="Borrow ID" required />
+                        <button type="submit" class="fetch-btn">Fetch Borrower</button>
+                    </form>
+                    <div id="nonMemberBorrowerDetails"></div> 
+                </div>
+        
+                <div class="fetch-table">
+                    <h3>All Non-Member Borrowers</h3>
+                    <table id="nonMemberBorrowerTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Phone Number</th>
+                                <th>ID Proof Status</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        
+            <div class="right-update">
+                <h3>Update Non-Member Borrower</h3>
+                <form id="updateNonMemberBorrowerForm" >
+                    <input type="hidden" id="updateBorrowID" />
+                    <input type="text" id="updateBorrowerName" placeholder="Name" required />
+                    <input type="text" id="updateBorrowerAddress" placeholder="Address" required />
+                    <input type="text" id="updateBorrowerPhoneNumber" placeholder="Phone Number" required />
+                    <div class="form-group"><input type="checkbox" id="updateIDProof_Status"   class="custom-checkbox"/> <label for="updateIDProof_Status" class="custom-label">ID Proof Verified</label></div>
+                    <input type="text" id="updateBorrowerStatus" placeholder="Status" required />
+                    <button type="submit" class="update-btn">Update Borrower</button>
+                </form>
+            </div>
+        </div>            
     </main>
 </body>
 </html>
