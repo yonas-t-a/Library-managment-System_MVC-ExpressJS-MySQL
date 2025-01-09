@@ -27,12 +27,15 @@ const adminModel = {
         const result = await selectSpecificAttributesCell("password", tableName, idHoldingColumnName, id);
     },
     insertAdmin: async (name, phone_number, email, password) => {
-        const adminID = IdGenerator("adminID", "admin", "admin");
-        const query = 'INSERT INTO admin (adminID ,name, phone_number, email, password) VALUES (?,?,?,?,?)'
+        const adminID = await IdGenerator("adminID", "admin", "admin");  
+        const query = 'INSERT INTO admin (adminID, name, phone_number, email, `password`) VALUES (?, ?, ?, ?, ?)';
         try {
-            await pool.query(query, [adminID, name, phone_number, email,password])
+            const result = await pool.query(query, [adminID, name, phone_number, email, password]);
+            console.log('Admin inserted successfully:', result);
         } catch (error) {
-            console.log(`Error In inserting to Admin Table: ${error.meesage}`)
+            console.error(`Error In inserting to Admin Table: ${error.message}`);
+            console.error(`Query: ${query}`);
+            console.error(`Values: ${[adminID, name, phone_number, email, password]}`);
         }
     },
     getAllAdmins: async () =>{
@@ -44,14 +47,17 @@ const adminModel = {
         return result 
     },
     updateAdmin: async (id, name, phone_number, email, password) => {
-        const query = 'UPDATE admin SET name=?, phone_number=?, email=?, password=? WHERE id=?'
+        const query = 'UPDATE admin SET name=?, phone_number=?, email=?, password=? WHERE adminID=?'; 
         try {
-            await pool.query(query, [name, phone_number, email, password, id])
+            const result = await pool.query(query, [name, phone_number, email, password, id]);
+            console.log('Admin updated successfully:', result);
         } catch (error) {
-            console.log('Error in Updating Admin')
+            console.log('Error in Updating Admin:', error.message);
+            console.error(`Query: ${query}`);
+            console.error(`Values: [${name}, ${phone_number}, ${email}, ${password}, ${id}]`);
         }
-
     },
+    
     deleteAdmin: async (id) => {
         const result = await deleteRowByID(tableName, idHoldingColumnName, id)
         return result

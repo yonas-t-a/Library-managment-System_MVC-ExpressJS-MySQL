@@ -20,8 +20,8 @@ export async function getAllAdmin   (req, res) {
 export async function getAdminById  (req, res) {
     const id = req.params.id;
     try {
-        const result = await adminModel.getAdminById(id);
-        res.status(200).json(data)        
+        const [result] = await adminModel.getAdminByID(id);
+        res.status(200).json(result)        
     } catch (error) {
         res.status(500).send(`Error in fetching the movie by ID | Controller: ${error.message}`)
     }

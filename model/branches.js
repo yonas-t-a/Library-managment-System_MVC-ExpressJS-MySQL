@@ -30,7 +30,7 @@ const branchModel = {
         return result
     },
     insertBranch: async (address, phone_number, email, br_adminID) => {
-        const brancheID = IdGenerator("brancheID", "branches", "branch");
+        const brancheID = await IdGenerator("brancheID", "branches", "branch");
         const query = 'INSERT INTO branches (brancheID, address, phone_number, email, br_adminID) VALUES (?,?,?,?,?)';
         try {
             await pool.query(query, [brancheID, address, phone_number, email, br_adminID]);

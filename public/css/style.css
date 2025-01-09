@@ -1,0 +1,181 @@
+* {
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: grid;
+    grid-template-columns: 20rem 75% 25%; /* Adjusted grid columns */
+    grid-template-rows: 100vh;  /* Ensure it fills the entire height */
+    height: 100vh;
+    overflow: hidden; /* Prevent scrollbars if they are not needed */
+}
+
+header {
+    height: 100vh;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+nav {
+    width: 100%; /* Make sure the nav takes full width of the header */
+    padding: 20px;
+}
+
+.navTitle {
+    margin-top: 10px;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.navLink {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    gap: 10px;
+}
+
+.navGoToAdmin {
+    font-size: 20px;
+    margin-top: 40vh;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+    width: 100%;
+}
+.admin-main{
+    display: flex;
+    flex-direction: column;
+}
+.what-header{
+    align-self: center;
+}
+.admin-management {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.left-add-find-delete {
+    width: 80%; 
+}
+
+.right-update {
+    width: 20%;  
+}
+
+h3 {
+    margin-bottom: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Add Admin Button (Green) */
+.add-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.add-btn:hover {
+    background-color: #45a049;
+}
+
+/* Fetch Admin Button (Green) */
+.fetch-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.fetch-btn:hover {
+    background-color: #45a049;
+}
+
+/* Update Admin Button (Yellow) */
+.update-btn {
+    background-color: #FFEB3B;
+    color: black;
+}
+
+.update-btn:hover {
+    background-color: #FFCD00;
+}
+
+/* Delete Admin Button (Red) */
+.delete-btn {
+    background-color: #F44336;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #D32F2F;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+.addAdminFormIpt{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+}
+.findAdminFormIpt{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+}
+
