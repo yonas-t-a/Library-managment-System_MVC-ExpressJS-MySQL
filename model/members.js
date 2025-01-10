@@ -41,7 +41,7 @@ const memberModel = {
 
     insertMember: async (name, address, phone_number, email, date_of_membership, memberhip_status) => {
         const memberID = await IdGenerator("memberID", "member", "member");
-        const query = 'INSERT INTO member (memberID, name, address, phone_number, email, date_of_membership, memberhip_status) VALUES (?,?,?,?,?,?,?)';
+        const query = `INSERT INTO member (memberID, name, address, phone_number, email, date_of_membership, memberhip_status) VALUES (?,?,?,?,?,?,?)`;
         try {
             await pool.query(query, [memberID, name, address, phone_number, email, date_of_membership, memberhip_status]);
         } catch (error) {
