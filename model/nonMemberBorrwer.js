@@ -35,7 +35,7 @@ const nonMemberBorrowerModel = {
     },
 
     insertNonMemberBorrower: async (name, address, phone_number, IDProof_Status, status) => {
-        const borrowID = IdGenerator("borrowID", "nonMemberBorrower", "borrow");
+        const borrowID = await IdGenerator("borrowID", "nonMemberBorrower", "borrow");
         const query = 'INSERT INTO nonMemberBorrower (borrowID, name, address, phone_number, IDProof_Status, status) VALUES (?,?,?,?,?,?)';
         try {
             await pool.query(query, [borrowID, name, address, phone_number, IDProof_Status, status]);

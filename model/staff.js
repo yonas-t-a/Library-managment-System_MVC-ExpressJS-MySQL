@@ -56,7 +56,7 @@ const staffModel = {
     },
 
     insertStaff: async (name, role, phone_number, email, hire_Date, salary, st_brancheID, st_adminID) => {
-        const staffID = IdGenerator("staffID", "staff", "staff");
+        const staffID = await IdGenerator("staffID", "staff", "staff");
         const query = 'INSERT INTO staff (staffID, name, role, phone_number, email, hire_Date, salary, st_brancheID, st_adminID) VALUES (?,?,?,?,?,?,?,?,?)';
         try {
             await pool.query(query, [staffID, name, role, phone_number, email, hire_Date, salary, st_brancheID, st_adminID]);

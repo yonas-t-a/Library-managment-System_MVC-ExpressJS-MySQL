@@ -30,7 +30,7 @@ const fineModel = {
     },
 
     insertFine: async (amount, datePaid, fs_transactionID) => {
-        const fineID = IdGenerator("fineID", "fines", "fine");
+        const fineID = await IdGenerator("fineID", "fines", "fine");
         const query = 'INSERT INTO fines (fineID, amount, datePaid, fs_transactionID) VALUES (?,?,?,?)';
         try {
             await pool.query(query, [fineID, amount, datePaid, fs_transactionID]);

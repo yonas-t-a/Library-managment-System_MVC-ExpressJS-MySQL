@@ -35,7 +35,7 @@ const transactionModel = {
     },
 
     insertTransaction: async (issueDate, dueDate, returnDate, tl_memberID, tl_borrowID, tl_bookID) => {
-        const transactionID = IdGenerator("transactionID", "transaction", "transaction");
+        const transactionID = await IdGenerator("transactionID", "transaction", "transaction");
         const query = 'INSERT INTO transaction (transactionID, issueDate, dueDate, returnDate, tl_memberID, tl_borrowID, tl_bookID) VALUES (?,?,?,?,?,?,?)';
         try {
             await pool.query(query, [transactionID, issueDate, dueDate, returnDate, tl_memberID, tl_borrowID, tl_bookID]);

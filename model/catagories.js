@@ -20,7 +20,7 @@ const categoryModel = {
     },
 
     insertCategory: async (catagoryName, description) => {
-        const catagoryID = IdGenerator("catagoryID", "catagories", "category");
+        const catagoryID = await IdGenerator("catagoryID", "catagories", "category");
         const query = 'INSERT INTO catagories (catagoryID, catagoryName, description) VALUES (?,?,?)';
         try {
             await pool.query(query, [catagoryID, catagoryName, description]);

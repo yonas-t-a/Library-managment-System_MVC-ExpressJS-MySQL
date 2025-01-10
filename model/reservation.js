@@ -30,7 +30,7 @@ const reservationModel = {
     },
 
     insertReservation: async (reservationDate, status, res_bookID, res_memberID) => {
-        const reservationID = IdGenerator("reservationID", "reservation", "reservation");
+        const reservationID = await IdGenerator("reservationID", "reservation", "reservation");
         const query = 'INSERT INTO reservation (reservationID, reservationDate, status, res_bookID, res_memberID) VALUES (?,?,?,?,?)';
         try {
             await pool.query(query, [reservationID, reservationDate, status, res_bookID, res_memberID]);

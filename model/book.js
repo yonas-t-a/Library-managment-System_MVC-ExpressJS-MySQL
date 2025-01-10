@@ -34,7 +34,7 @@ const bookModel = {
         return result
     },
     insertBook: async (title, author, ISBN, publisher, book_catagoryID, book_shelveCode) => {
-        const bookID = IdGenerator("bookID", "book", "book");
+        const bookID = await IdGenerator("bookID", "book", "book");
         const query = `
             INSERT INTO book (bookID, title, author, ISBN, publisher, book_catagoryID, book_shelveCode)
             VALUES (?, ?, ?, ?, ?, ?, ?)
