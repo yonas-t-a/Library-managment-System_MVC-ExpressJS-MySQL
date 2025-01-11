@@ -38,13 +38,13 @@
                     <h3>Add Non-Member Borrower</h3>
                     <form id="addNonMemberBorrowerForm" class="addStaffFormIpt">
                         <div class="firstPart">
-                        <input type="text" id="borrowID" placeholder="Borrow ID" required />
                         <input type="text" id="borrowerName" placeholder="Name" required />
                         <input type="text" id="borrowerAddress" placeholder="Address" required />
                         <input type="text" id="borrowerPhoneNumber" placeholder="Phone Number" required />
+                        <div class="form-group"><input type="checkbox" id="IDProof_Status" class="custom-checkbox" /> <label for="IDProof_Status"class="custom-label" class="custom-label">ID Proof Verified</label></div>
                         </div>
                         <div class="secondPart">
-                        <div class="form-group"><input type="checkbox" id="IDProof_Status" class="custom-checkbox" /> <label for="IDProof_Status"class="custom-label" class="custom-label">ID Proof Verified</label></div>
+                        
                         <input type="text" id="borrowerStatus" placeholder="Status" required />
                         <button type="submit" class="add-btn">Add Borrower</button>
                         </div>
