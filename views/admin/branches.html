@@ -46,26 +46,42 @@
                     <h3>Find Branch by ID</h3>
                     <form id="findForm" class="findAdminFormIpt">
                         <input type="text" id="idInput" placeholder="Enter Branch ID" required />
-                        <button type="button" id="findButton" class="fetch-btn">Find</button>
+                        <button type="submit" id="findButton" class="fetch-btn">Find</button>
                     </form>
                     <div id="branchDetails" class="branch-details"></div>
                 </div>
-                <!-- Table Container -->
-                <h3>All Admins</h3>
-                <div class="fetch-table"></div>
+                <div class="fetch-table">
+                    <h3>All Branches</h3>
+                    <table id="branchesTable">
+                        <thead>
+                            <tr>
+                                <th>Branch ID</th>
+                                <th>Address</th>
+                                <th>Phone Number</th>
+                                <th>Email</th>
+                                <th>Admin ID</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <!-- Update Form -->
-            <form id="updateBranchForm" class="right-update">
+            <div class="right-update">
                 <h3>Update Branch</h3>
-                <input type="hidden" id="updateBranchID">
-                <input type="text" id="updateAddress" placeholder="Address" required>
-                <input type="text" id="updatePhoneNumber" placeholder="Phone Number" required>
-                <input type="email" id="updateEmail" placeholder="Email" required>
-                <input type="text" id="updateAdminID" placeholder="Admin ID" required>
-                <button type="submit" class="update-btn">Update Branch</button>
-            </form>
+                <form id="updateBranchForm">
+                    <input type="hidden" id="updateBranchID">
+                    <input type="text" id="updateAddress" placeholder="Address" required>
+                    <input type="text" id="updatePhoneNumber" placeholder="Phone Number" required>
+                    <input type="email" id="updateEmail" placeholder="Email" required>
+                    <input type="text" id="updateAdminID" placeholder="Admin ID" required>
+                    <button type="submit" class="update-btn">Update Branch</button>
+                </form>
+            </div>
         </div>
     </main>
     <script src="../../public/js/branchesFE.js"></script>
 </body>
 </html>
+

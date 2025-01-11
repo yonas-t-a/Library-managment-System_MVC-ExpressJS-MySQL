@@ -1,177 +1,185 @@
+// branchesFE.js
+
 document.addEventListener("DOMContentLoaded", () => {
-    const apiUrl = "http://localhost:3500/api/branch";
-
-    // Fetch all branches
-    async function fetchBranches() {
-        try {
-            const response = await fetch(apiUrl);
-            const branches = await response.json();
-            renderBranchesTable(branches);
-        } catch (error) {
-            console.error("Error fetching branches:", error);
-        }
-    }
-
-    // Render branches in a table
-    function renderBranchesTable(branches) {
-        const tableContainer = document.querySelector(".fetch-table");
-        tableContainer.innerHTML = `
-            <table>
-                <thead>
-                    <tr>
-                        <th>Branch ID</th>
-                        <th>Address</th>
-                        <th>Phone Number</th>
-                        <th>Email</th>
-                        <th>Admin ID</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${branches.map(branch => `
-                        <tr>
-                            <td>${branch.brancheID}</td>
-                            <td>${branch.address}</td>
-                            <td>${branch.phone_number}</td>
-                            <td>${branch.email}</td>
-                            <td>${branch.br_adminID}</td>
-                            <td>
-                                <button class="update-btn" data-id="${branch.brancheID}">Edit</button>
-                                <button class="delete-btn" data-id="${branch.brancheID}">Delete</button>
-                            </td>
-                        </tr>
-                    `).join("")}
-                </tbody>
-            </table>
-        `;
-
-        // Attach event listeners for edit and delete buttons
-        document.querySelectorAll(".edit-btn").forEach(btn => {
-            btn.addEventListener("click", () => editBranch(btn.dataset.id));
+    const apiUrl = "/api/branch";
+  
+    // Elements
+    const insertForm = document.getElementById("insertBranchForm");
+    const findForm = document.getElementById("findForm");
+    const branchesTableBody = document.querySelector("#branchesTable tbody");
+    const updateForm = document.getElementById("updateBranchForm");
+  
+    // Add Branch
+    insertForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const address = document.getElementById("address").value;
+      const phone_number = document.getElementById("phone_number").value;
+      const email = document.getElementById("email").value;
+      const br_adminID = document.getElementById("br_adminID").value;
+  
+      try {
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ address, phone_number, email, br_adminID }),
         });
-        document.querySelectorAll(".delete-btn").forEach(btn => {
-            btn.addEventListener("click", () => deleteBranch(btn.dataset.id));
-        });
-    }
-
-    // Add a new branch
-    document.querySelector(".insert-to-table").addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const address = document.getElementById("address").value;
-        const phone_number = document.getElementById("phone_number").value;
-        const email = document.getElementById("email").value;
-        const br_adminID = document.getElementById("br_adminID").value;
-
-        try {
-            await fetch(apiUrl, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ address, phone_number, email, br_adminID }),
-            });
-            fetchBranches();
-        } catch (error) {
-            console.error("Error adding branch:", error);
+  
+        if (response.ok) {
+          alert("Branch added successfully!");
+          insertForm.reset();
+          fetchAllBranches();
+        } else {
+          alert("Failed to add branch. Please try again.");
         }
+      } catch (error) {
+        console.error("Error adding branch:", error);
+      }
     });
-
-    // Delete a branch
+  
+    // Fetch All Branches
+    async function fetchAllBranches() {
+      try {
+        const response = await fetch(apiUrl);
+        if (response.ok) {
+          const branches = await response.json();
+          branchesTableBody.innerHTML = branches
+            .map(
+              (branch) => `
+              <tr>
+                <td>${branch.brancheID}</td>
+                <td>${branch.address}</td>
+                <td>${branch.phone_number}</td>
+                <td>${branch.email}</td>
+                <td>${branch.br_adminID}</td>
+                <td>
+                  <button class="edit-btn" data-id="${branch.brancheID}">Edit</button>
+                  <button class="delete-btn" data-id="${branch.brancheID}">Delete</button>
+                </td>
+              </tr>
+            `
+            )
+            .join("");
+          addTableEventListeners();
+        } else {
+          alert("Failed to fetch branches.");
+        }
+      } catch (error) {
+        console.error("Error fetching branches:", error);
+      }
+    }
+  
+    // Fetch Branch by ID
+    findForm.addEventListener("submit", async (event) => {
+        console.log(event)
+      event.preventDefault();
+      const id = document.getElementById("idInput").value;
+  
+      try {
+        const response = await fetch(`${apiUrl}/${id}`);
+        if (response.ok) {
+          const [branch] = await response.json();
+          const detailsDiv = document.getElementById("branchDetails");
+          detailsDiv.innerHTML = `
+            <p><strong>Address:</strong> ${branch.address}</p>
+            <p><strong>Phone Number:</strong> ${branch.phone_number}</p>
+            <p><strong>Email:</strong> ${branch.email}</p>
+            <p><strong>Admin ID:</strong> ${branch.br_adminID}</p>
+          `;
+        } else {
+          alert("Branch not found.");
+        }
+      } catch (error) {
+        console.error("Error fetching branch by ID:", error);
+      }
+    });
+  
+    // Delete Branch
     async function deleteBranch(id) {
-        try {
-            await fetch(`${apiUrl}/${id}`, { method: "DELETE" });
-            fetchBranches();
-        } catch (error) {
-            console.error("Error deleting branch:", error);
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: "DELETE",
+        });
+  
+        if (response.ok) {
+          alert("Branch deleted successfully!");
+          fetchAllBranches();
+        } else {
+          alert("Failed to delete branch.");
         }
+      } catch (error) {
+        console.error("Error deleting branch:", error);
+      }
     }
-
-    // Edit a branch
+  
+    // Edit Branch
     async function editBranch(id) {
-        try {
-            // Log the ID for debugging
-            console.log("Editing branch with ID:", id);
-    
-            // Fetch branch details
-            const response = await fetch(`${apiUrl}/${id}`);
-            if (!response.ok) {
-                throw new Error(`Error fetching branch: ${response.statusText}`);
-            }
-    
-            const branch = await response.json();
-    
-            // Log the fetched branch for debugging
-            console.log("Fetched branch details:", branch);
-    
-            // Populate the update form
-            populateUpdateForm(branch);
-        } catch (error) {
-            console.error("Error fetching branch:", error);
+      try {
+        const response = await fetch(`${apiUrl}/${id}`);
+        if (response.ok) {
+          const [branch] = await response.json();
+          document.getElementById("updateBranchID").value = id;
+          document.getElementById("updateAddress").value = branch.address;
+          document.getElementById("updatePhoneNumber").value = branch.phone_number;
+          document.getElementById("updateEmail").value = branch.email;
+          document.getElementById("updateAdminID").value = branch.br_adminID;
+        } else {
+          alert("Failed to fetch branch for editing.");
         }
+      } catch (error) {
+        console.error("Error fetching branch for editing:", error);
+      }
     }
-    
-    function populateUpdateForm(branch) {
-        if (!branch) {
-            console.error("Branch data is undefined. Cannot populate the form.");
-            return;
+  
+    // Update Branch
+    updateForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const id = document.getElementById("updateBranchID").value;
+      const address = document.getElementById("updateAddress").value;
+      const phone_number = document.getElementById("updatePhoneNumber").value;
+      const email = document.getElementById("updateEmail").value;
+      const br_adminID = document.getElementById("updateAdminID").value;
+  
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ address, phone_number, email, br_adminID }),
+        });
+  
+        if (response.ok) {
+          alert("Branch updated successfully!");
+          updateForm.reset();
+          fetchAllBranches();
+        } else {
+          alert("Failed to update branch.");
         }
-    
-        document.getElementById("updateBranchID").value = branch[0].brancheID|| "";
-        document.getElementById("updateAddress").value = branch[0].address || "";
-        document.getElementById("updatePhoneNumber").value = branch[0].phone_number || "";
-        document.getElementById("updateEmail").value = branch[0].email || "";
-        document.getElementById("updateAdminID").value = branch[0].br_adminID || "";
-    }
-    // gat by id
-    document.getElementById("findButton").addEventListener("click", async () => {
-        const branchId = document.getElementById("idInput").value;
-
-        try {
-            const response = await fetch(`${apiUrl}/${branchId}`);
-            const branch = await response.json();
-
-            if (response.ok) {
-                displayBranchDetails(branch);
-            } else {
-                document.getElementById("branchDetails").innerHTML = `<p>No branch found with ID: ${branchId}</p>`;
-            }
-        } catch (error) {
-            console.error("Error finding branch by ID:", error);
-        }
+      } catch (error) {
+        console.error("Error updating branch:", error);
+      }
     });
-
-    // Display branch details when found
-    function displayBranchDetails(branch) {
-        const detailsContainer = document.getElementById("branchDetails");
-        detailsContainer.innerHTML = `
-            <h3>Branch Details</h3>
-            <p><strong>Branch ID:</strong> ${branch[0].brancheID}</p>
-            <p><strong>Address:</strong> ${branch[0].address}</p>
-            <p><strong>Phone Number:</strong> ${branch[0].phone_number}</p>
-            <p><strong>Email:</strong> ${branch[0].email}</p>
-            <p><strong>Admin ID:</strong> ${branch[0].br_adminID}</p>
-        `;
+  
+    // Add Event Listeners to Table Buttons
+    function addTableEventListeners() {
+      document.querySelectorAll(".delete-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          const id = button.dataset.id;
+          deleteBranch(id);
+        });
+      });
+  
+      document.querySelectorAll(".edit-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          const id = button.dataset.id;
+          editBranch(id);
+        });
+      });
     }
-    // Update a branch
-    document.querySelector(".right-update").addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const id = document.getElementById("updateBranchID").value;
-        const address = document.getElementById("updateAddress").value;
-        const phone_number = document.getElementById("updatePhoneNumber").value;
-        const email = document.getElementById("updateEmail").value;
-        const br_adminID = document.getElementById("updateAdminID").value;
-
-        try {
-            await fetch(`${apiUrl}/${id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ address, phone_number, email, br_adminID }),
-            });
-            fetchBranches();
-        } catch (error) {
-            console.error("Error updating branch:", error);
-        }
-    });
-
-    // Initialize the table
-    fetchBranches();
-});
-
+  
+    // Initial Fetch
+    fetchAllBranches();
+  });
+  
