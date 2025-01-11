@@ -1,28 +1,31 @@
-const bookList = document.getElementById('bookList');
-const addBookForm = document.getElementById('addBookForm');
+const API_BASE_URL = '/api/book'; // Base URL for book-related backend APIs
 
-// Fetch and display all books
+// Helper function to fetch and render all books in the table
 async function fetchBooks() {
     try {
-        const response = await fetch('/api/book');
+        const response = await fetch(`${API_BASE_URL}`);
         const books = await response.json();
-        bookList.innerHTML = '';
-        books.forEach(book => {
+        console.log(books)
+
+        const bookTableBody = document.querySelector('#bookTable tbody');
+        bookTableBody.innerHTML = ''; // Clear existing rows
+
+        books.forEach((book) => {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${book.bookID}</td>
                 <td>${book.title}</td>
                 <td>${book.author}</td>
-                <td>${book.ISBN || '-'}</td>
+                <td>${book.ISBN || 'N/A'}</td>
                 <td>${book.publisher}</td>
                 <td>${book.book_catagoryID}</td>
                 <td>${book.book_shelveCode}</td>
                 <td>
-                    <button onclick="editBook(${book.bookID})">Edit</button>
-                    <button onclick="deleteBook(${book.bookID})">Delete</button>
+                    <button class="edit-btn" data-id="${book.bookID}">Edit</button>
+                    <button class="delete-btn" data-id="${book.bookID}">Delete</button>
                 </td>
             `;
-            bookList.appendChild(row);
+            bookTableBody.appendChild(row);
         });
     } catch (error) {
         console.error('Error fetching books:', error);
@@ -30,89 +33,139 @@ async function fetchBooks() {
 }
 
 // Add a new book
-addBookForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+document.querySelector('#addBookForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
     const bookData = {
-        title: document.getElementById('title').value,
-        author: document.getElementById('author').value,
-        ISBN: document.getElementById('isbn').value,
-        publisher: document.getElementById('publisher').value,
-        book_catagoryID: document.getElementById('categoryId').value,
-        book_shelveCode: document.getElementById('shelveCode').value,
+        title: document.querySelector('#bookTitle').value,
+        author: document.querySelector('#bookAuthor').value,
+        ISBN: document.querySelector('#bookISBN').value,
+        publisher: document.querySelector('#bookPublisher').value,
+        book_catagoryID: document.querySelector('#book_catagoryID').value,
+        book_shelveCode: document.querySelector('#book_shelveCode').value,
     };
 
     try {
-        const response = await fetch('/api/book', {
+        const response = await fetch(`${API_BASE_URL}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(bookData),
         });
+
         if (response.ok) {
             alert('Book added successfully!');
-            fetchBooks();
-            addBookForm.reset();
+            fetchBooks(); // Refresh the book table
         } else {
-            alert('Error adding book');
+            const error = await response.json();
+            alert(`Error adding book: ${error.message}`);
         }
     } catch (error) {
         console.error('Error adding book:', error);
     }
 });
 
-// Delete a book
-async function deleteBook(bookID) {
-    if (!confirm('Are you sure you want to delete this book?')) return;
+// Fetch a book by ID
+document.querySelector('#findBookForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const bookId = document.querySelector('#bookId').value;
 
     try {
-        const response = await fetch(`/api/book/${bookID}`, { method: 'DELETE' });
+        const response = await fetch(`${API_BASE_URL}/${bookId}`);
         if (response.ok) {
-            alert('Book deleted successfully!');
-            fetchBooks();
+            const [book] = await response.json();
+            const bookDetails = `
+                <p><strong>ID:</strong> ${book.bookID}</p>
+                <p><strong>Title:</strong> ${book.title}</p>
+                <p><strong>Author:</strong> ${book.author}</p>
+                <p><strong>ISBN:</strong> ${book.ISBN || 'N/A'}</p>
+                <p><strong>Publisher:</strong> ${book.publisher}</p>
+                <p><strong>Category ID:</strong> ${book.book_catagoryID}</p>
+                <p><strong>Shelf Code:</strong> ${book.book_shelveCode}</p>
+            `;
+            document.querySelector('#bookDetails').innerHTML = bookDetails;
         } else {
-            alert('Error deleting book');
+            alert('Book not found!');
         }
     } catch (error) {
-        console.error('Error deleting book:', error);
+        console.error('Error fetching book:', error);
     }
-}
+});
 
-// Edit a book
-async function editBook(bookID) {
-    const newTitle = prompt('Enter new title:');
-    const newAuthor = prompt('Enter new author:');
-    const newPublisher = prompt('Enter new publisher:');
-    const newCategoryId = prompt('Enter new category ID:');
-    const newShelveCode = prompt('Enter new shelve code:');
+// Handle book updates
+document.querySelector('#updateBookForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-    if (!newTitle || !newAuthor || !newPublisher || !newCategoryId || !newShelveCode) {
-        alert('All fields are required!');
-        return;
-    }
-
-    const updatedData = {
-        title: newTitle,
-        author: newAuthor,
-        publisher: newPublisher,
-        book_catagoryID: newCategoryId,
-        book_shelveCode: newShelveCode,
+    const bookId = document.querySelector('#updateBookId').value;
+    const updatedBookData = {
+        title: document.querySelector('#updateBookTitle').value,
+        author: document.querySelector('#updateBookAuthor').value,
+        ISBN: document.querySelector('#updateBookISBN').value,
+        publisher: document.querySelector('#updateBookPublisher').value,
+        book_catagoryID: document.querySelector('#updateBook_catagoryID').value,
+        book_shelveCode: document.querySelector('#updateBook_shelveCode').value,
     };
 
     try {
-        const response = await fetch(`/api/book/${bookID}`, {
+        const response = await fetch(`${API_BASE_URL}/${bookId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(updatedData),
+            body: JSON.stringify(updatedBookData),
         });
+
         if (response.ok) {
             alert('Book updated successfully!');
-            fetchBooks();
+            fetchBooks(); // Refresh the book table
         } else {
-            alert('Error updating book');
+            const error = await response.json();
+            alert(`Error updating book: ${error.message}`);
         }
     } catch (error) {
         console.error('Error updating book:', error);
     }
-}
+});
 
-// Initial fetch
+// Handle delete and edit button clicks in the table
+document.querySelector('#bookTable').addEventListener('click', async (event) => {
+    console.log(event)
+    const target = event.target;
+    const bookId = target.dataset.id;
+    console.log(bookId)
+
+    if (target.classList.contains('delete-btn')) {
+        // Delete book
+        try {
+            const response = await fetch(`${API_BASE_URL}/${bookId}`, { method: 'DELETE' });
+            if (response.ok) {
+                alert('Book deleted successfully!');
+                fetchBooks(); // Refresh the book table
+            } else {
+                const error = await response.json();
+                alert(`Error deleting book: ${error.message}`);
+            }
+        } catch (error) {
+            console.error('Error deleting book:', error);
+        }
+    } else if (target.classList.contains('edit-btn')) {
+        // Populate the update form with book data
+        try {
+            const response = await fetch(`${API_BASE_URL}/${bookId}`);
+            if (response.ok) {
+                const [book]= await response.json();
+                console.log(book)
+                document.querySelector('#updateBookId').value = book.bookID;
+                document.querySelector('#updateBookTitle').value = book.title;
+                document.querySelector('#updateBookAuthor').value = book.author;
+                document.querySelector('#updateBookISBN').value = book.ISBN || '';
+                document.querySelector('#updateBookPublisher').value = book.publisher;
+                document.querySelector('#updateBook_catagoryID').value = book.book_catagoryID;
+                document.querySelector('#updateBook_shelveCode').value = book.book_shelveCode;
+            }
+        } catch (error) {
+            console.error('Error fetching book for editing:', error);
+        }
+    }
+});
+
+// Initialize by fetching all books
 fetchBooks();

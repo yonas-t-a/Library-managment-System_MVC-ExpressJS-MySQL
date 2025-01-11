@@ -34,15 +34,15 @@ const bookModel = {
         return result
     },
     insertBook: async (title, author, ISBN, publisher, book_catagoryID, book_shelveCode) => {
-        const bookID = await IdGenerator("bookID", "book", "book");
+        // const bookID = await IdGenerator("bookID", "book", "book");
         const query = `
-            INSERT INTO book (bookID, title, author, ISBN, publisher, book_catagoryID, book_shelveCode)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO book (title, author, ISBN, publisher, book_catagoryID, book_shelveCode)
+            VALUES (?, ?, ?, ?, ?, ?)
         `;
         try {
-            await pool.query(query, [bookID, title, author, ISBN, publisher, book_catagoryID, book_shelveCode]);
+            await pool.query(query, [title, author, ISBN, publisher, book_catagoryID, book_shelveCode]);
         } catch (error) {
-            console.log(`Error in inserting to Book table: ${error.message}`);
+            console.log(`Error in inserting to Book table: ${error}`);
         }
     },
     getAllBooks: async () => {
