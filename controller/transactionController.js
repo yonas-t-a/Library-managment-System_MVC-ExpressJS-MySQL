@@ -20,7 +20,7 @@ export async function getAllTransaction(req, res) {
 }
 
 export async function getTransactionById(req, res) {
-    const { transactionID } = req.params;
+    const  transactionID  = req.params.id;
     try {
         const result = await transactionModel.getTransactionByID(transactionID);
         if (!result) {
@@ -33,7 +33,7 @@ export async function getTransactionById(req, res) {
 }
 
 export async function updateTransaction(req, res) {
-    const { transactionID } = req.params;
+    const transactionID  = req.params.id;
     const { issueDate, dueDate, returnDate, tl_memberID, tl_borrowID, tl_bookID } = req.body;
 
     const updatedIssueDate = issueDate || await transactionModel.transactionIssueDate(transactionID);
@@ -60,7 +60,7 @@ export async function updateTransaction(req, res) {
 }
 
 export async function deleteTransaction(req, res) {
-    const { transactionID } = req.params;
+    const transactionID  = req.params.id;
     try {
         await transactionModel.deleteTransaction(transactionID);
         res.status(200).send("Transaction successfully deleted");

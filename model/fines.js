@@ -29,11 +29,11 @@ const fineModel = {
         return result;
     },
 
-    insertFine: async (amount, datePaid, fs_transactionID) => {
+    insertFine: async (amount, paidStatus, datePaid, fs_transactionID) => {
         const fineID = await IdGenerator("fineID", "fines", "fine");
-        const query = 'INSERT INTO fines (fineID, amount, datePaid, fs_transactionID) VALUES (?,?,?,?)';
+        const query = 'INSERT INTO fines (fineID, amount, paidStatus, datePaid, fs_transactionID) VALUES (?,?,?,?,?)';
         try {
-            await pool.query(query, [fineID, amount, datePaid, fs_transactionID]);
+            await pool.query(query, [fineID, amount, paidStatus, datePaid, fs_transactionID]);
         } catch (error) {
             console.log(`Error In inserting into Fine Table: ${error.message}`);
         }
@@ -49,14 +49,27 @@ const fineModel = {
         return result;
     },
 
-    updateFine: async (id, amount, datePaid, fs_transactionID) => {
-        const query = 'UPDATE fines SET amount=?, datePaid=?, fs_transactionID=? WHERE fineID=?';
+    updateFine: async (id, amount, paidStatus, datePaid, fs_transactionID) => {
+        const query = `
+            UPDATE fines 
+            SET amount = ?, paidStatus = ?, datePaid = ?, fs_transactionID = ? 
+            WHERE fineID = ?
+        `;
         try {
-            await pool.query(query, [amount, datePaid, fs_transactionID, id]);
+            const [result] = await pool.query(query, [
+                amount,
+                paidStatus,
+                datePaid,
+                fs_transactionID,
+                id,
+            ]);
+            console.log('Fine updated successfully:', result);
+            return result;
         } catch (error) {
-            console.log('Error in Updating Fine:', error.message);
+            console.error(`Error in Updating Fine (ID: ${id}):`, error.message);
         }
     },
+    
 
     deleteFine: async (id) => {
         const result = await deleteRowByID(tableName, idHoldingColumnName, id);
