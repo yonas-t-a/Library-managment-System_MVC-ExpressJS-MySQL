@@ -4,7 +4,7 @@ export async function createStaff(req, res) {
     const { name, role, phone_number, email, hire_Date, salary, st_brancheID, st_adminID } = req.body;
     try {
         await staffModel.insertStaff(name, role, phone_number, email, hire_Date, salary, st_brancheID, st_adminID);
-        res.status(201).send('Staff successfully created');
+        res.status(201).json({ message: 'Staff successfully created' }); 
     } catch (error) {
         res.status(500).send(`Error in inserting data into Staff table | Controller: ${error.message}`);
     }
@@ -20,9 +20,9 @@ export async function getAllStaff(req, res) {
 }
 
 export async function getStaffById(req, res) {
-    const { staffID } = req.params;
+    const id = req.params.id;
     try {
-        const result = await staffModel.getStaffByID(staffID);
+        const result = await staffModel.getStaffByID(id);
         if (!result) {
             return res.status(404).send('Staff not found');
         }
@@ -33,7 +33,7 @@ export async function getStaffById(req, res) {
 }
 
 export async function updateStaff(req, res) {
-    const { staffID } = req.params;
+    const  staffID  = req.params.id;
     const { name, role, phone_number, email, hire_Date, salary, st_brancheID, st_adminID } = req.body;
 
     const updatedName = name || await staffModel.staffName(staffID);
@@ -47,17 +47,17 @@ export async function updateStaff(req, res) {
 
     try {
         await staffModel.updateStaff(staffID, updatedName, updatedRole, updatedPhoneNumber, updatedEmail, updatedHireDate, updatedSalary, updatedStBranchID, updatedStAdminID);
-        res.status(200).send('Staff successfully updated');
+        res.status(200).json({message:'Staff successfully updated'});
     } catch (error) {
         res.status(500).send(`Error in updating staff | Controller: ${error.message}`);
     }
 }
 
 export async function deleteStaff(req, res) {
-    const { staffID } = req.params;
+    const  staffID  = req.params.id;
     try {
         await staffModel.deleteStaff(staffID);
-        res.status(200).send('Staff successfully deleted');
+        res.status(200).json({message:'Staff successfully deleted'});
     } catch (error) {
         res.status(500).send(`Error in deleting the staff by ID | Controller: ${error.message}`);
     }
