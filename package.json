@@ -8,8 +8,9 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Yonas Tessema Achule <https://github.com/yonas-t-a/>",
+  "license": "MIT",
+  "copyright": "© 2025 Yonas Tessema Achule. All rights reserved.",
   "dependencies": {
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
